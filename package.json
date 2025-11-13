@@ -2,7 +2,7 @@
   "name": "vsce-node-test-runner",
   "displayName": "node test runner",
   "description": "node --test ruuner",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "engines": {
     "vscode": "^1.106.0"
