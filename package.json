@@ -1,0 +1,65 @@
+{
+  "name": "node-test-runner",
+  "displayName": "node test runner",
+  "description": "node --test ruuner",
+  "version": "0.0.1",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.106.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:node-test-runner.runTest",
+    "onCommand:node-test-runner.runTestWatch",
+    "onCommand:node-test-runner.runFile",
+    "onCommand:node-test-runner.runFileWatch",
+    "onCommand:node-test-runner.stopWatch",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescriptreact"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "node-test-runner.runTest",
+        "title": "Node Test Runner: Run test"
+      },
+      {
+        "command": "node-test-runner.runTestWatch",
+        "title": "Node Test Runner: Run test (watch)"
+      },
+      {
+        "command": "node-test-runner.runFile",
+        "title": "Node Test Runner: Run file"
+      },
+      {
+        "command": "node-test-runner.runFileWatch",
+        "title": "Node Test Runner: Run file (watch)"
+      },
+      {
+        "command": "node-test-runner.stopWatch",
+        "title": "Node Test Runner: Stop watch"
+      }
+    ]
+  },
+  "scripts": {
+    "lint": "xo --fix",
+    "test": "xo && node --test"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.106.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "xo": "^1.2.3"
+  },
+  "xo": {
+    "rules": {
+      "capitalized-comments": "off"
+    }
+  }
+}
