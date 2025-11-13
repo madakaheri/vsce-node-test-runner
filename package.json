@@ -4,6 +4,7 @@
   "description": "node --test ruuner",
   "version": "1.0.0",
   "type": "module",
+  "icon": "docs/images/logo.png",
   "engines": {
     "vscode": "^1.106.0"
   },
@@ -11,11 +12,6 @@
     "Testing"
   ],
   "activationEvents": [
-    "onCommand:node-test-runner.runTest",
-    "onCommand:node-test-runner.runTestWatch",
-    "onCommand:node-test-runner.runFile",
-    "onCommand:node-test-runner.runFileWatch",
-    "onCommand:node-test-runner.stopWatch",
     "onLanguage:javascript",
     "onLanguage:typescript",
     "onLanguage:javascriptreact",
@@ -60,6 +56,7 @@
   "keywords": [
     "vsce"
   ],
+  "publisher": "MadakaHeri",
   "homepage": "https://github.com/madakaheri/vsce-node-test-runner#readme",
   "bugs": {
     "url": "https://github.com/madakaheri/vsce-node-test-runner/issues"
