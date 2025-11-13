@@ -1,5 +1,5 @@
 {
-  "name": "node-test-runner",
+  "name": "vsce-node-test-runner",
   "displayName": "node test runner",
   "description": "node --test ruuner",
   "version": "0.0.1",
@@ -56,6 +56,17 @@
     "@vscode/test-cli": "^0.0.12",
     "@vscode/test-electron": "^2.5.2",
     "xo": "^1.2.3"
+  },
+  "keywords": [
+    "vsce"
+  ],
+  "homepage": "https://github.com/madakaheri/vsce-node-test-runner#readme",
+  "bugs": {
+    "url": "https://github.com/madakaheri/vsce-node-test-runner/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/madakaheri/vsce-node-test-runner.git"
   },
   "xo": {
     "rules": {
