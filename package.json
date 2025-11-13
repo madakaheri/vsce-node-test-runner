@@ -8,7 +8,7 @@
     "vscode": "^1.106.0"
   },
   "categories": [
-    "Other"
+    "Testing"
   ],
   "activationEvents": [
     "onCommand:node-test-runner.runTest",
