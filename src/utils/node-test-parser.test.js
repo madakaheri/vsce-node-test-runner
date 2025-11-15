@@ -1,6 +1,6 @@
 import {test, describe} from 'node:test';
 import assert from 'node:assert/strict';
-import {findTestNameInLine, findTestsInDocument, buildExactTestPattern} from './node-test-parser.js';
+import nodeTestParser from './node-test-parser.js';
 
 describe('nodeTestParser', () => {
 	test('finds tests, its, and describes within document text', () => {
@@ -14,7 +14,7 @@ describe('group', () => {
 });
 `.trim();
 
-		const found = findTestsInDocument(documentText);
+		const found = nodeTestParser.findTestsInDocument(documentText);
 		assert.deepStrictEqual(found, [
 			{line: 2, name: 'adds numbers'},
 			{line: 3, name: 'handles edge cases'},
@@ -24,14 +24,14 @@ describe('group', () => {
 	});
 
 	test('extracts names from different node:test helpers', () => {
-		assert.strictEqual(findTestNameInLine('   test("with spaces", () => {})'), 'with spaces');
-		assert.strictEqual(findTestNameInLine('\tit.only(\'single quotes\', fn);'), 'single quotes');
-		assert.strictEqual(findTestNameInLine('describe.skip(`templated`, fn);'), 'templated');
-		assert.strictEqual(findTestNameInLine('console.log("no match")'), undefined);
+		assert.strictEqual(nodeTestParser.findTestNameInLine('   test("with spaces", () => {})'), 'with spaces');
+		assert.strictEqual(nodeTestParser.findTestNameInLine('\tit.only(\'single quotes\', fn);'), 'single quotes');
+		assert.strictEqual(nodeTestParser.findTestNameInLine('describe.skip(`templated`, fn);'), 'templated');
+		assert.strictEqual(nodeTestParser.findTestNameInLine('console.log("no match")'), undefined);
 	});
 
 	test('builds an exact match pattern for node --test', () => {
-		const pattern = buildExactTestPattern('handles (complex) cases?');
+		const pattern = nodeTestParser.buildExactTestPattern('handles (complex) cases?');
 		assert.strictEqual(pattern, String.raw`^handles \(complex\) cases\?$`);
 	});
 });

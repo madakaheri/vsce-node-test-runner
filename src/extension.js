@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
-import {findTestsInDocument} from './utils/node-test-parser.js';
-import {createTerminalCloseListener, disposeAllTerminals} from './utils/terminal-manager.js';
+import nodeTestParser from './utils/node-test-parser.js';
+import terminalManager from './utils/terminal-manager.js';
 import {runCommandHandler} from './handlers/run-command-handler.js';
 import {stopCommandHandler} from './handlers/stop-command-handler.js';
 
@@ -18,7 +18,7 @@ const DOCUMENT_SELECTOR = [
 
 class NodeTestCodeLensProvider {
 	provideCodeLenses(document) {
-		const tests = findTestsInDocument(document.getText());
+		const tests = nodeTestParser.findTestsInDocument(document.getText());
 		const lenses = [];
 		if (tests.length > 0) {
 			const headerRange = new vscode.Range(0, 0, 0, 0);
@@ -74,21 +74,21 @@ class NodeTestCodeLensProvider {
 
 function activate(context) {
 	const codeLensProvider = new NodeTestCodeLensProvider();
-	const closeListener = createTerminalCloseListener();
+	const closeListener = terminalManager.createTerminalCloseListener();
 
 	context.subscriptions.push(
 		vscode.languages.registerCodeLensProvider(DOCUMENT_SELECTOR, codeLensProvider),
-		vscode.commands.registerCommand(RUN_COMMAND, args => runCommandHandler(args, {watch: false, scope: 'single'})),
-		vscode.commands.registerCommand(RUN_WATCH_COMMAND, args => runCommandHandler(args, {watch: true, scope: 'single'})),
-		vscode.commands.registerCommand(RUN_ALL_COMMAND, args => runCommandHandler(args, {watch: false, scope: 'file'})),
-		vscode.commands.registerCommand(RUN_ALL_WATCH_COMMAND, args => runCommandHandler(args, {watch: true, scope: 'file'})),
-		vscode.commands.registerCommand(RUN_STOP_COMMAND, args => stopCommandHandler(args)),
+		vscode.commands.registerCommand(RUN_COMMAND, arguments_ => runCommandHandler(arguments_, {watch: false, scope: 'single'})),
+		vscode.commands.registerCommand(RUN_WATCH_COMMAND, arguments_ => runCommandHandler(arguments_, {watch: true, scope: 'single'})),
+		vscode.commands.registerCommand(RUN_ALL_COMMAND, arguments_ => runCommandHandler(arguments_, {watch: false, scope: 'file'})),
+		vscode.commands.registerCommand(RUN_ALL_WATCH_COMMAND, arguments_ => runCommandHandler(arguments_, {watch: true, scope: 'file'})),
+		vscode.commands.registerCommand(RUN_STOP_COMMAND, arguments_ => stopCommandHandler(arguments_)),
 		closeListener,
 	);
 }
 
 function deactivate() {
-	disposeAllTerminals();
+	terminalManager.disposeAllTerminals();
 }
 
 export {activate, deactivate};
